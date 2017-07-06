@@ -6,5 +6,8 @@ body{
 #blo{
     width: 100vw;
     height: 100vh;
-    background-color: cornflowerblue;
+    background-color: #F5F5DC;
+}
+#storage{
+    display: none;
 }
