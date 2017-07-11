@@ -1,0 +1,16 @@
+<svg width="500" height="1000" viewbox="0 0 500 1000" xmlns="http://www.w3.org/2000/svg">
+
+    <rect width="500" height="750" fill="#F5F5DC" y="300"></rect>
+    <rect width="430" height="52" fill="#F5F5DC" y="250" x="70"></rect>
+    <rect width="70" height="20" fill="#F5F5DC" x="10" y="290"></rect>
+    <path d="M5 300 C 240 110, 350 90, 495 250" stroke="#AF4448" stroke-width="10px" fill="#F5F5DC" stroke-linecap="round"/>
+
+    <line x1="100" y1="30" x2="150" y2="300" stroke="#AF4448" stroke-width="30" stroke-linecap="round"/>
+    <line x1="100" y1="30" x2="150" y2="300" stroke="#F5F5DC" stroke-width="10" stroke-linecap="round"/>
+
+    <rect width="60" height="30" fill="#F5F5DC" stroke="#AF4448" rx="5" ry="5"
+          stroke-width="10" y="50" x="23" transform="rotate(-10, 0, 0)"></rect>
+
+    <polygon points="114,50 124,100 180,65" stroke="#AF4448" stroke-width="10" fill="#F5F5DC" stroke-linejoin="round"/>
+
+</svg>

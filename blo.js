@@ -15,8 +15,12 @@ var blo = {
         cloud_min_y: -200,
     },
     ground_config: {
-        ground_id: [
-            {img: document.getElementById('ground_frag_1'), width: 2000, height: 600}
+        isle_id: [
+            {img: document.getElementById('ground_frag_1'), width: 2000, height: 600},
+        ],
+        spacer_id: [
+            {img: document.getElementById('ground_spacer_1'), width: 500, height: 1000, leftHor: 300, rightHor: 250},
+            {img: document.getElementById('ground_spacer_2'), width: 500, height: 1000, leftHor: 320, rightHor: 600}
         ],
         moving: [],
     },
@@ -34,7 +38,7 @@ var blo = {
         setInterval(function () {
             blo.move();
             blo.draw(blo.ctx);
-        }, 1000 / 60);
+        }, 1000/60);
     },
     resize_canvas: function (ctx) {
         ctx.canvas.width = window.innerWidth;
@@ -94,7 +98,7 @@ var blo = {
         });
     },
     spawn_ground: function () {
-        var ground = this.ground_config.ground_id[Math.floor(Math.random() * (this.ground_config.ground_id.length))];
+        var ground = this.ground_config.isle_id[Math.floor(Math.random() * (this.ground_config.isle_id.length))];
         this.ground_config.moving.push({
             img: ground.img,
             height: ground.height,

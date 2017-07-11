@@ -1,8 +1,5 @@
 <svg width="1500" height="600" viewbox="0 0 1500 600" xmlns="http://www.w3.org/2000/svg">
 
-    <rect fill="grey" width="1500" height="600"></rect>
-
-
     <path d="M50 305 C 250 200, 450 200, 544 305" stroke="#AF4448" stroke-width="10px" fill="#F5F5DC"/>
     <rect width="496" height="300" y="300" x="50" fill="#F5F5DC"></rect>
     <rect width="55" height="270" y="330" fill="#F5F5DC"></rect>
@@ -19,9 +16,13 @@
     <path d="M120 300 C 95 200, 95 100, 110 50" stroke="#AF4448" stroke-width="50" fill="transparent" stroke-linecap="round"/>
     <path d="M50 200 C 70 205, 90 205, 100 200" stroke="#AF4448" stroke-width="40" fill="transparent" stroke-linecap="round"/>
     <path d="M50 200 C 40 180, 40 160, 40 140" stroke="#AF4448" stroke-width="40" fill="transparent" stroke-linecap="round"/>
+    <path d="M110 180 C 130 185, 150 180, 160 170" stroke="#AF4448" stroke-width="45" fill="transparent" stroke-linecap="round"/>
+    <path d="M160 90 C 165 120, 165 150, 160 170" stroke="#AF4448" stroke-width="45" fill="transparent" stroke-linecap="round"/>
 
     <path d="M120 300 C 95 200, 95 100, 110 50" stroke="#F5F5DC" stroke-width="30" fill="transparent" stroke-linecap="round"/>
     <path d="M50 200 C 70 205, 90 205, 100 200" stroke="#F5F5DC" stroke-width="20" fill="transparent" stroke-linecap="round"/>
     <path d="M50 200 C 40 180, 40 160, 40 140" stroke="#F5F5DC" stroke-width="20" fill="transparent" stroke-linecap="round"/>
+    <path d="M110 180 C 130 185, 150 180, 160 170" stroke="#F5F5DC" stroke-width="25" fill="transparent" stroke-linecap="round"/>
+    <path d="M160 90 C 165 120, 165 150, 160 170" stroke="#F5F5DC" stroke-width="25" fill="transparent" stroke-linecap="round"/>
 
 </svg>
