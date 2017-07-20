@@ -2,12 +2,31 @@ body{
     margin:0;
     padding: 0;
     overflow: hidden;
+    position: relative;
 }
 #blo{
-    width: 100vw;
-    height: 100vh;
-    background-color: #F5F5DC;
+    /*background-color: #F5F5DC;*/
 }
 #storage{
     display: none;
+}
+#loading{
+    background-color: #F5F5DC;
+    opacity:1;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#loading h1{
+    font-size: 5vw;
+    color: #AF4448;
+    font-family: sans-serif;
+}
+.full{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
 }

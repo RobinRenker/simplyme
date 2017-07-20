@@ -6,4 +6,5 @@
 
     <path d="M5 320 C 100 250, 250 200, 495 595" stroke="#AF4448" stroke-width="10px" fill="#F5F5DC" stroke-linecap="round"/>
     <polygon points="265,585 265,460 480,585" stroke="none" fill="#F5F5DC"/>
+
 </svg>
