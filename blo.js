@@ -3,7 +3,7 @@ var blo = {
     line: 0,
     config: {
         theme_index: 0,
-        theme_change_rate: 5,//%
+        theme_change_rate: 3,//%
         sky: {
             cloud_spawn_rate: 30,
             cloud_max_spawns: 10,
@@ -13,10 +13,6 @@ var blo = {
         background:{
             fade_speed: 1,
             color_change_rate: 30,//%
-            backlight:[
-                {color:"rgba(256,256,256,0.4)",pos:0},
-                {color:"rgba(0,0,0,0.4)",pos:1}
-            ],
             themes:[
                 {
                     theme:"day",
@@ -71,6 +67,26 @@ var blo = {
                     ]
                 }
             ]
+        },
+        rain:{
+            line_x: 0,
+            line_y: 0,
+            spawn_rate: 80,
+            xs: 5,
+            ys: 15,
+            max_drops: 1000,
+            speed_x: 5,
+            speed_y: 20,
+            color: "#FFF"
+        },
+        thunder:{
+            spawn_rate: 40,
+            color1: "256,256,256,",
+            color2: "256,256,256,",
+            color1_o: 1,
+            color2_o: 0,
+            color1_p: 0,
+            color2_p: 1,
         }
     },
     parts: {
@@ -94,10 +110,9 @@ var blo = {
             col2:undefined,
             col1_cur:undefined,
             col2_cur:undefined,
-            drops:[
-
-            ]
         },
+        thunder:undefined,
+        rain:[]
     },
 
     init: function () {
@@ -126,16 +141,9 @@ var blo = {
     },
     draw: function (ctx) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
         ctx.beginPath();
 
-        var background_grad = ctx.createLinearGradient(0,0,0, ctx.canvas.height);
-        var tmp_color = this.moving.background.col1_cur;
-        background_grad.addColorStop(0, "rgba("+tmp_color.r+","+tmp_color.g+","+tmp_color.b+","+tmp_color.a+")");
-        var tmp_color = this.moving.background.col2_cur;
-        background_grad.addColorStop(1, "rgba("+tmp_color.r+","+tmp_color.g+","+tmp_color.b+","+tmp_color.a+")");
-        ctx.fillStyle = background_grad;
-        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        this.draw_background(ctx);
 
         for (var i = 0; i < this.moving.sky.length; i++) {
             ctx.drawImage(this.moving.sky[i].img, this.moving.sky[i].x, this.moving.sky[i].y);
@@ -144,6 +152,9 @@ var blo = {
             ctx.drawImage(this.moving.ground[i].img, this.moving.ground[i].x, this.moving.ground[i].y);
         }
 
+        this.draw_rain(ctx);
+        this.draw_thunder(ctx);
+
         ctx.closePath();
     },
     move: function () {
@@ -151,6 +162,7 @@ var blo = {
         this.move_background();
         this.move_sky();
         this.move_ground();
+        this.move_rain();
     },
     spawn: function () {
         if(Math.floor(Math.random() * 100) + 1 <= this.config.theme_change_rate){
@@ -171,6 +183,65 @@ var blo = {
                 x = false;
             }
             this.spawn_background(x);
+        }
+        if(Math.floor(Math.random() * 100) + 1 <= this.config.thunder.spawn_rate && this.config.background.themes[this.config.theme_index].theme == 'rain' && this.moving.thunder == undefined){
+            this.moving.thunder = [
+                {m: this.config.thunder.color1,op: this.config.thunder.color1_o, pos: this.config.thunder.color1_p},
+                {m: this.config.thunder.color2,op: this.config.thunder.color2_o, pos: this.config.thunder.color2_p},
+            ];
+        }
+    },
+    draw_background: function (ctx) {
+        var tmp_1 = this.moving.background.col1_cur;
+        var tmp_2 = this.moving.background.col2_cur;
+        this.draw_gradient(ctx,[
+            {pos: 0, color: "rgba("+tmp_1.r+","+tmp_1.g+","+tmp_1.b+","+tmp_1.a+")"},
+            {pos: 1, color: "rgba("+tmp_2.r+","+tmp_2.g+","+tmp_2.b+","+tmp_2.a+")"},
+        ])
+    },
+    draw_gradient: function (ctx, colors) {
+        var background_grad = ctx.createLinearGradient(0,0,0, ctx.canvas.height);
+        for(var i = 0; i < colors.length; i++){
+            background_grad.addColorStop(colors[i].pos, colors[i].color);
+        }
+        ctx.fillStyle = background_grad;
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    },
+    draw_rain: function (ctx) {
+        ctx.strokeStyle = this.config.rain.color;
+        for(var i = 0; i < this.moving.rain.length; i++){
+            var x = Math.floor(this.config.rain.line_x - this.moving.rain[i].start_x + this.moving.rain[i].xr);
+            var y = Math.floor(this.config.rain.line_y - this.moving.rain[i].start_y);
+            ctx.moveTo(x,y);
+            ctx.lineTo(x+this.config.rain.xs,y+this.config.rain.ys);
+            if(x > ctx.canvas.width || y > ctx.canvas.height){
+                this.moving.rain.splice(i, 1);
+            }
+        }
+        ctx.stroke();
+    },
+    draw_thunder: function (ctx) {
+        if(this.moving.thunder != undefined){
+            var x = [];
+            var del = 0;
+            for(var i = 0; i < this.moving.thunder.length; i++){
+                x.push({pos: this.moving.thunder[i].pos, color: "rgba("+this.moving.thunder[i].m+this.moving.thunder[i].op+")"})
+            }
+            this.draw_gradient(ctx, x);
+            for(var i = 0; i < this.moving.thunder.length; i++){
+                if(this.moving.thunder[i].op > 0){
+                    this.moving.thunder[i].op = this.moving.thunder[i].op - 0.1;    ////????
+                    if(this.moving.thunder[i].op < 0){
+                        this.moving.thunder[i].op = 0;
+                    }
+                }
+                if(del < this.moving.thunder[i].op){
+                    del = this.moving.thunder[i].op;
+                }
+            }
+            if(del == 0){
+                this.moving.thunder = undefined;
+            }
         }
     },
     move_sky: function () {
@@ -220,6 +291,25 @@ var blo = {
                 return cur;
             }
         }
+    },
+    move_rain: function () {
+      if(this.config.background.themes[this.config.theme_index].theme == 'rain'){
+        if((Math.floor(Math.random() * 100) + 1) <= this.config.rain.spawn_rate && this.moving.rain.length < this.config.rain.max_drops){
+            var shift = (this.ctx.canvas.height / this.config.rain.speed_y)*this.config.rain.speed_x;
+            this.moving.rain.push({
+                xr: Math.floor(Math.random() * (this.ctx.canvas.width + shift) - shift),
+                start_x: this.config.rain.line_x,
+                start_y: this.config.rain.line_y
+            });
+        }
+      }
+      if(this.moving.rain.length == 0){
+          this.config.rain.line_x = 0;
+          this.config.rain.line_y = 0;
+      } else {
+          this.config.rain.line_x += this.config.rain.speed_x;
+          this.config.rain.line_y += this.config.rain.speed_y;
+      }
     },
     change_theme: function () {
         this.config.theme_index = Math.floor(Math.random() * this.config.background.themes.length);
