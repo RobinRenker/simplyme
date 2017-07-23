@@ -2,11 +2,75 @@ var blo = {
     ctx: undefined,
     line: 0,
     config: {
+        theme_index: 0,
+        theme_change_rate: 5,//%
         sky: {
             cloud_spawn_rate: 30,
             cloud_max_spawns: 10,
             cloud_max_y: 100,
             cloud_min_y: -200,
+        },
+        background:{
+            fade_speed: 1,
+            color_change_rate: 30,//%
+            backlight:[
+                {color:"rgba(256,256,256,0.4)",pos:0},
+                {color:"rgba(0,0,0,0.4)",pos:1}
+            ],
+            themes:[
+                {
+                    theme:"day",
+                    top: [
+                        "rgba(224,244,138,0.5)",
+                        "rgba(165,235,137,0.5)",
+                        "rgba(34,206,163,0.5)",
+                    ],
+                    bottom:[
+                        "rgba(34,206,163,0.5)",
+                        "rgba(165,235,137,0.5)",
+                        "rgba(53,178,166,0.5)"
+                    ]
+                },
+                {
+                    theme:"light evening",
+                    top: [
+                        "rgba(0,0,0,0.5)",
+                        "rgba(0,24,72,0.5)",
+                        "rgba(120,144,168,0.5)",
+                    ],
+                    bottom:[
+                        "rgba(53,178,166,1)",
+                        "rgba(250,139,126,1)",
+                        "rgba(206,159,41,1)"
+                    ]
+                },
+                {
+                    theme:"rain",
+                    top: [
+                        "rgba(0,0,0,0.9)",
+                        "rgba(43,40,47,1)",
+                        "rgba(64,61,67,1)",
+                    ],
+                    bottom:[
+                        "rgba(58,70,86,1)",
+                        "rgba(69,93,124,1)",
+                        "rgba(65,49,89,1)"
+                    ]
+                },
+                {
+                    theme:"night",
+                    top: [
+                        "rgba(0,0,0,0.9)",
+                        "rgba(43,40,47,1)",
+                        "rgba(0,0,0,1)",
+                    ],
+                    bottom:[
+                        "rgba(0,0,0,0.9)",
+                        "rgba(43,40,47,1)",
+                        "rgba(0,0,0,1)",
+                    ]
+                }
+            ]
         }
     },
     parts: {
@@ -20,15 +84,20 @@ var blo = {
             {img: document.getElementById('ground_frag_1'), width: 1500, height: 600, leftHor: 330, rightHor: 350},
             {img: document.getElementById('ground_spacer_1'), width: 500, height: 1000, leftHor: 300, rightHor: 250},
             {img: document.getElementById('ground_spacer_2'), width: 500, height: 1000, leftHor: 320, rightHor: 600},
-        ],
-        backgrounds:[
-            {img: document.getElementById('background_sky_1'), theme: 'sky', width: 5000, height: 1000}
         ]
     },
     moving: {
         sky: [],
         ground: [],
-        background: [],
+        background: {
+            col1:undefined,
+            col2:undefined,
+            col1_cur:undefined,
+            col2_cur:undefined,
+            drops:[
+
+            ]
+        },
     },
 
     init: function () {
@@ -36,6 +105,8 @@ var blo = {
         this.ctx = c.getContext("2d");
         this.resize(this.ctx);
 
+        this.change_theme();
+        this.spawn_background_both();
         this.spawn();
 
         window.onresize = function () {
@@ -52,29 +123,20 @@ var blo = {
     resize: function (ctx) {
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
-        this.resize_background();
-    },
-    resize_background: function () {
-        for(var i = 0; i < this.moving.background.length; i++){
-            this.moving.background[i].height = this.ctx.canvas.height;
-            this.moving.background[i].width = (this.ctx.canvas.height / this.moving.background[i].stock_height)*this.moving.background[i].stock_width;
-            console.log(this.moving.background[i].width +" "+this.moving.background[i].height);
-        }
     },
     draw: function (ctx) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
         ctx.beginPath();
 
-        for(var i = 0; i < this.moving.background.length; i++){
-            ctx.drawImage(
-                this.moving.background[i].img,
-                this.moving.background[i].x,
-                this.moving.background[i].y,
-                this.moving.background[i].width,
-                this.moving.background[i].height
-            );
-        }
+        var background_grad = ctx.createLinearGradient(0,0,0, ctx.canvas.height);
+        var tmp_color = this.moving.background.col1_cur;
+        background_grad.addColorStop(0, "rgba("+tmp_color.r+","+tmp_color.g+","+tmp_color.b+","+tmp_color.a+")");
+        var tmp_color = this.moving.background.col2_cur;
+        background_grad.addColorStop(1, "rgba("+tmp_color.r+","+tmp_color.g+","+tmp_color.b+","+tmp_color.a+")");
+        ctx.fillStyle = background_grad;
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
         for (var i = 0; i < this.moving.sky.length; i++) {
             ctx.drawImage(this.moving.sky[i].img, this.moving.sky[i].x, this.moving.sky[i].y);
         }
@@ -86,10 +148,15 @@ var blo = {
     },
     move: function () {
         this.line++;
+        this.move_background();
         this.move_sky();
         this.move_ground();
     },
     spawn: function () {
+        if(Math.floor(Math.random() * 100) + 1 <= this.config.theme_change_rate){
+            this.change_theme();
+            console.log("Theme changed "+this.config.background.themes[this.config.theme_index].theme);
+        }
         if ((Math.floor(Math.random() * 100) + 1) <= this.config.sky.cloud_spawn_rate &&
             this.config.sky.cloud_spawn_rate != 0 &&
             this.moving.sky.length < this.config.sky.cloud_max_spawns) {
@@ -97,6 +164,13 @@ var blo = {
         }
         if (this.moving.ground.length == 0) {
             this.spawn_ground();
+        }
+        if(Math.floor((Math.random() * 100) + 1) <= this.config.background.color_change_rate){
+            var x = true;
+            if(Math.floor(Math.random() * 2) == 0){
+                x = false;
+            }
+            this.spawn_background(x);
         }
     },
     move_sky: function () {
@@ -106,14 +180,6 @@ var blo = {
             this.moving.sky[i].x = x;
             if (x > this.ctx.canvas.width) {
                 this.moving.sky.splice(i, 1);
-            }
-        }
-        this.spawn_background();
-        for(var i = 0; i < this.moving.background.length; i++){
-            this.moving.background[i].x = this.line + this.moving.background[i].start;
-
-            if(this.line + this.moving.background[i].x > this.ctx.canvas.width){
-                this.moving.background.splice(i,1);
             }
         }
     },
@@ -127,6 +193,37 @@ var blo = {
         }
         var i = this.moving.ground[this.moving.ground.length-1];
 
+    },
+    move_background: function () {
+        if(this.moving.background.col1_cur == undefined){
+            this.moving.background.col1_cur = this.moving.background.col1;
+            this.moving.background.col2_cur = this.moving.background.col2;
+        }
+
+        this.moving.background.col1_cur = move_background_x(this.moving.background.col1, this.moving.background.col1_cur);
+        this.moving.background.col2_cur = move_background_x(this.moving.background.col2, this.moving.background.col2_cur);
+
+        function move_background_x(aim, cur) {
+            cur.a = aim.a;
+
+            cur.r = move_background_x_inc(aim.r, cur.r);
+            cur.g = move_background_x_inc(aim.g, cur.g);
+            cur.b = move_background_x_inc(aim.b, cur.b);
+
+            return cur;
+            function move_background_x_inc(aim, cur){
+                if(cur > aim){
+                    cur = cur - blo.config.background.fade_speed;
+                } else if(cur < aim){
+                    cur = cur + blo.config.background.fade_speed;
+                }
+                return cur;
+            }
+        }
+    },
+    change_theme: function () {
+        this.config.theme_index = Math.floor(Math.random() * this.config.background.themes.length);
+        this.spawn_background_both();
     },
     spawn_cloud: function () {
         var cloud = this.parts.clouds[Math.floor(Math.random() * (this.parts.clouds.length))];
@@ -151,42 +248,33 @@ var blo = {
             start: this.line,
         });
     },
-    spawn_background: function () {
-
-        if(this.moving.background.length == 0){
-            spawn_background_x(this.line - (this.parts.backgrounds[0].width * (this.ctx.canvas.height / this.parts.backgrounds[0].height)) + this.ctx.canvas.width);
+    spawn_background:function (top) {
+        var color = this.config.background.themes[this.config.theme_index];
+        if(top){
+            color = color.top;
+        } else{
+            color = color.bottom;
         }
-
-        var smallest = undefined;
-        for(var i = 0; i < this.moving.background.length; i++){
-            if(smallest == undefined){
-                smallest = this.moving.background[i].x;
-            } else if(smallest.x > this.moving.background[i].x) {
-                smallest = this.moving.background[i].x
-            }
+        color = color[Math.floor(Math.random() * color.length)];
+        var color_batch = color.split("(")[1].split(")")[0].split(",");
+        var color_obj = {
+          r: Number(color_batch[0]),
+          g: Number(color_batch[1]),
+          b: Number(color_batch[2]),
+          a: 1
+        };
+        if(color_batch.length == 4){
+            color_obj.a = Number(color_batch[3]);
         }
-
-        console.log(smallest);
-        if(smallest >= -100){
-            console.log("test");
+        if(top){
+            this.moving.background.col1 = color_obj;
+        } else {
+            this.moving.background.col2 = color_obj;
         }
-
-
-
-        function spawn_background_x(start) {
-            console.log("Spawn")
-            blo.moving.background.push({
-                img: blo.parts.backgrounds[0].img,
-                x: undefined,
-                y: 0,
-                start: start,
-                stock_width: blo.parts.backgrounds[0].width,
-                stock_height: blo.parts.backgrounds[0].height,
-                width:0,
-                height:0
-            });
-            blo.resize_background();
-        }
+    },
+    spawn_background_both: function () {
+        this.spawn_background(true);
+        this.spawn_background(false);
     }
 }
 blo.init();
