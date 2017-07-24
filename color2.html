@@ -28,61 +28,9 @@
 
 
 </body>
+<script src="blo.js"></script>
 <script>
-    var x = [
-        {
-            theme:"day",
-            top: [
-                "rgba(224,244,138,0.5)",
-                "rgba(165,235,137,0.5)",
-                "rgba(34,206,163,0.5)",
-            ],
-            bottom:[
-                "rgba(34,206,163,0.5)",
-                "rgba(165,235,137,0.5)",
-                "rgba(53,178,166,0.5)"
-            ]
-        },
-        {
-            theme:"light evening",
-            top: [
-                "rgba(0,0,0,0.5)",
-                "rgba(0,24,72,0.5)",
-                "rgba(120,144,168,0.5)",
-            ],
-            bottom:[
-                "rgba(53,178,166,1)",
-                "rgba(250,139,126,1)",
-                "rgba(206,159,41,1)"
-            ]
-        },
-        {
-            theme:"rain",
-            top: [
-                "rgba(0,0,0,0.9)",
-                "rgba(43,40,47,1)",
-                "rgba(64,61,67,1)",
-            ],
-            bottom:[
-                "rgba(58,70,86,1)",
-                "rgba(69,93,124,1)",
-                "rgba(65,49,89,1)"
-            ]
-        },
-        {
-            theme:"night",
-            top: [
-                "rgba(0,0,0,0.9)",
-                "rgba(43,40,47,1)",
-                "rgba(0,0,0,1)",
-            ],
-            bottom:[
-                "rgba(0,0,0,0.9)",
-                "rgba(43,40,47,1)",
-                "rgba(0,0,0,1)",
-            ]
-        }
-    ];
+    var x = blo.config.background.themes;
     var template = '';
     for(var i = 0; i < x.length; i++){
         template += '<div class="title">'+x[i].theme+'</div>';
