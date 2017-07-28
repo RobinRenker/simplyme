@@ -1,28 +1,28 @@
 <svg width="280" height="190" viewbox="0 0 280 190" xmlns="http://www.w3.org/2000/svg">
 
-    <circle cx="60" cy="110" r="60" fill="#AF4448"/>
-    <circle cx="80" cy="50" r="50" fill="#AF4448"/>
-    <circle cx="150" cy="60" r="40" fill="#AF4448"/>
-    <circle cx="210" cy="60" r="50" fill="#AF4448"/>
-    <circle cx="180" cy="140" r="50" fill="#AF4448"/>
-    <circle cx="120" cy="160" r="30" fill="#AF4448"/>
-    <circle cx="240" cy="120" r="40" fill="#AF4448"/>
+    <circle cx="60" cy="110" r="60" fill="#688ac4"/>
+    <circle cx="80" cy="50" r="50" fill="#688ac4"/>
+    <circle cx="150" cy="60" r="40" fill="#688ac4"/>
+    <circle cx="210" cy="60" r="50" fill="#688ac4"/>
+    <circle cx="180" cy="140" r="50" fill="#688ac4"/>
+    <circle cx="120" cy="160" r="30" fill="#688ac4"/>
+    <circle cx="240" cy="120" r="40" fill="#688ac4"/>
 
-    <circle cx="60" cy="110" r="50" fill="#F5F5DC"/>
-    <circle cx="80" cy="50" r="40" fill="#F5F5DC"/>
-    <circle cx="150" cy="60" r="30" fill="#F5F5DC"/>
-    <circle cx="210" cy="60" r="40" fill="#F5F5DC"/>
-    <circle cx="180" cy="140" r="40" fill="#F5F5DC"/>
-    <circle cx="120" cy="160" r="20" fill="#F5F5DC"/>
-    <circle cx="240" cy="120" r="30" fill="#F5F5DC"/>
+    <circle cx="60" cy="110" r="50" fill="#FFFFFF"/>
+    <circle cx="80" cy="50" r="40" fill="#FFFFFF"/>
+    <circle cx="150" cy="60" r="30" fill="#FFFFFF"/>
+    <circle cx="210" cy="60" r="40" fill="#FFFFFF"/>
+    <circle cx="180" cy="140" r="40" fill="#FFFFFF"/>
+    <circle cx="120" cy="160" r="20" fill="#FFFFFF"/>
+    <circle cx="240" cy="120" r="30" fill="#FFFFFF"/>
 
-    <circle cx="130" cy="100" r="60" fill="#F5F5DC"/>
-    <circle cx="120" cy="80" r="40" fill="#AF4448"/>
-    <circle cx="105" cy="125" r="30" fill="#AF4448"/>
-    <circle cx="120" cy="80" r="30" fill="#F5F5DC"/>
-    <circle cx="105" cy="125" r="20" fill="#F5F5DC"/>
+    <circle cx="130" cy="100" r="60" fill="#FFFFFF"/>
+    <circle cx="120" cy="80" r="40" fill="#688ac4"/>
+    <circle cx="105" cy="125" r="30" fill="#688ac4"/>
+    <circle cx="120" cy="80" r="30" fill="#FFFFFF"/>
+    <circle cx="105" cy="125" r="20" fill="#FFFFFF"/>
 
-    <circle cx="210" cy="110" r="30" fill="#AF4448"/>
-    <circle cx="210" cy="110" r="20" fill="#F5F5DC"/>
+    <circle cx="210" cy="110" r="30" fill="#688ac4"/>
+    <circle cx="210" cy="110" r="20" fill="#FFFFFF"/>
 
 </svg>

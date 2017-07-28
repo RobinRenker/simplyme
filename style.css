@@ -11,7 +11,7 @@ body{
     display: none;
 }
 #loading{
-    background-color: #F5F5DC;
+    background-color: #FFF;
     opacity:1;
     transition: opacity 1s ease-in-out;
     display: flex;
@@ -19,9 +19,9 @@ body{
     align-items: center;
 }
 #loading h1{
-    font-size: 5vw;
-    color: #AF4448;
-    font-family: sans-serif;
+    font-size: 10vmin;
+    color: #C90060;
+    font-family: "Arial Black";
 }
 .full{
     position: absolute;

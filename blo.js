@@ -4,37 +4,43 @@ var blo = {
     resize_timeout: undefined,
     config: {
         theme_index: 0,
-        theme_change_rate: 3,//%
-        device_size: 0,
-        device: [
-            {width: 0, id: 0, config:{weather:{rain:{spawn_rate: 10}}}},
-            {width: 600, id: 1, config:{}},
-            {width: 960, id: 2, config:{}},
-            {width: 1440, id: 3, config:{}}
-        ],
-        sky: {
-            cloud_spawn_rate: 30,
-            cloud_max_spawns: 10,
-            cloud_max_y: 100,
-            cloud_min_y: -200,
-        },
+        theme_change_rate: 8,//%
         weather: {
+            weather_index: 0,
+            weathers: [
+                {id: "sun", cloud: "light", overlay: [{r:0,g:0,b:0,a:0},{r:0,g:0,b:0,a:0}]},
+                {id: "storm", rain: true, cloud: "cover", thunder: true, overlay: [{r:0,g:0,b:0,a:0.8},{r:0,g:0,b:0,a:0}]}
+            ],
+            change_rate: 3,
             rain: {
-                active: true,
                 line_x: 0,
                 line_y: 0,
                 xs: 5,
                 ys: 15,
-                speed_x: 5,
+                speed_x: 7,
                 speed_y: 30,
                 color: "#FFF",
-
-                spawn_rate: 80,
-                max_drops: 1000,
+                max_drops: 0.2, //per px
+                spawns_per_loop: 0.007, //per px,
+                spawn_rate: 50,
+            },
+            thunder: {
+                spawn_rate: 10,
+                color1: {r:256,g:256,b:256,a:0},
+                color2: {r:256,g:256,b:256,a:1},
+            },
+            cloud: {
+                spawn_rate_storm: 50,
+                spawn_rate_light: 10,
+                max_storm: 0.02,
+                max_light: 0.003,
+                max_y: 100,
+                min_y: -200,
             }
         },
         background: {
             fade_speed: 1,
+            fade_speed_a: 0.1,
             color_change_rate: 30,//%
             themes: [
                 {
@@ -78,23 +84,22 @@ var blo = {
                 }
             ]
         },
-        thunder: {
-            spawn_rate: 10,
-            color1: "256,256,256,",
-            color2: "256,256,256,",
-            color1_o: 1,
-            color2_o: 0,
-            color1_p: 0,
-            color2_p: 1,
-        }
     },
     parts: {
-        clouds: [
-            {img: document.getElementById('cloud_frag_1'), width: 500},
-            {img: document.getElementById('cloud_frag_2'), width: 220},
-            {img: document.getElementById('cloud_frag_3'), width: 280},
-            {img: document.getElementById('cloud_frag_4'), width: 190},
-        ],
+        clouds: {
+            storm: [
+                {img: document.getElementById('cloud_frag_1_b'), width: 500},
+                {img: document.getElementById('cloud_frag_2_b'), width: 220},
+                {img: document.getElementById('cloud_frag_3_b'), width: 280},
+                {img: document.getElementById('cloud_frag_4_b'), width: 190},
+            ],
+            light: [
+                {img: document.getElementById('cloud_frag_1'), width: 500},
+                {img: document.getElementById('cloud_frag_2'), width: 220},
+                {img: document.getElementById('cloud_frag_3'), width: 280},
+                {img: document.getElementById('cloud_frag_4'), width: 190},
+            ]
+        },
         isles: [
             {img: document.getElementById('ground_frag_1'), width: 1500, height: 600, leftHor: 330, rightHor: 350},
             {img: document.getElementById('ground_spacer_1'), width: 500, height: 1000, leftHor: 300, rightHor: 250},
@@ -110,6 +115,12 @@ var blo = {
             col1_cur: undefined,
             col2_cur: undefined,
         },
+        overlay: {
+            col1: undefined,
+            col2: undefined,
+            col1_cur: undefined,
+            col2_cur: undefined,
+        },
         thunder: undefined,
         rain: []
     },
@@ -120,6 +131,7 @@ var blo = {
         this.resize(this.ctx);
 
         this.change_theme();
+        this.change_weather();
         this.spawn_background_both();
         this.spawn();
 
@@ -141,14 +153,6 @@ var blo = {
         this.resize_timeout = setTimeout(function () {
             ctx.canvas.width = window.innerWidth;
             ctx.canvas.height = window.innerHeight;
-            var index = 0;
-            for (var i = 0; i < blo.config.device.length; i++) {
-                if (window.innerWidth >= blo.config.device[i].width) {
-                    blo.config.device_size = blo.config.device[i].id;
-                    index = i;
-                }
-            }
-            blo.config = blo.merge_config(blo.config, blo.config.device[index].config);
             lo_clear();
         }, 50);
 
@@ -161,7 +165,7 @@ var blo = {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.beginPath();
 
-        this.draw_background(ctx);
+        this.draw_overlay(ctx, this.moving.background.col1_cur, this.moving.background.col2_cur);
 
         for (var i = 0; i < this.moving.sky.length; i++) {
             ctx.drawImage(this.moving.sky[i].img, this.moving.sky[i].x, this.moving.sky[i].y);
@@ -171,6 +175,7 @@ var blo = {
         }
 
         this.draw_rain(ctx);
+        this.draw_overlay(ctx, this.moving.overlay.col1_cur, this.moving.overlay.col2_cur);
         this.draw_thunder(ctx);
 
         ctx.closePath();
@@ -181,16 +186,12 @@ var blo = {
         this.move_sky();
         this.move_ground();
         this.move_rain();
+        this.move_overlay();
     },
     spawn: function () {
         if (Math.floor(Math.random() * 100) + 1 <= this.config.theme_change_rate) {
             this.change_theme();
             console.log("Theme changed " + this.config.background.themes[this.config.theme_index].theme);
-        }
-        if ((Math.floor(Math.random() * 100) + 1) <= this.config.sky.cloud_spawn_rate &&
-            this.config.sky.cloud_spawn_rate != 0 &&
-            this.moving.sky.length < this.config.sky.cloud_max_spawns) {
-            this.spawn_cloud();
         }
         if (this.moving.ground.length == 0) {
             this.spawn_ground();
@@ -202,20 +203,17 @@ var blo = {
             }
             this.spawn_background(x);
         }
-        if (Math.floor(Math.random() * 100) + 1 <= this.config.thunder.spawn_rate && this.config.background.themes[this.config.theme_index].theme == 'rain' && this.moving.thunder == undefined) {
-            this.moving.thunder = [
-                {m: this.config.thunder.color1, op: this.config.thunder.color1_o, pos: this.config.thunder.color1_p},
-                {m: this.config.thunder.color2, op: this.config.thunder.color2_o, pos: this.config.thunder.color2_p},
-            ];
+        if (Math.floor(Math.random() * 100) + 1 <= this.config.weather.change_rate) {
+            this.change_weather();
         }
+        this.spawn_cloud();
+        this.spawn_thunder();
     },
-    draw_background: function (ctx) {
-        var tmp_1 = this.moving.background.col1_cur;
-        var tmp_2 = this.moving.background.col2_cur;
+    draw_overlay: function (ctx, color1, color2) {
         this.draw_gradient(ctx, [
-            {pos: 0, color: "rgba(" + tmp_1.r + "," + tmp_1.g + "," + tmp_1.b + "," + tmp_1.a + ")"},
-            {pos: 1, color: "rgba(" + tmp_2.r + "," + tmp_2.g + "," + tmp_2.b + "," + tmp_2.a + ")"},
-        ])
+            {pos: 0, color: "rgba(" + color1.r + "," + color1.g + "," + color1.b + "," + color1.a + ")"},
+            {pos: 1, color: "rgba(" + color2.r + "," + color2.g + "," + color2.b + "," + color2.a + ")"},
+        ]);
     },
     draw_gradient: function (ctx, colors) {
         var background_grad = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
@@ -240,24 +238,17 @@ var blo = {
     },
     draw_thunder: function (ctx) {
         if (this.moving.thunder != undefined) {
-            var x = [];
             var del = 0;
+            this.draw_overlay(ctx, this.moving.thunder[0], this.moving.thunder[1]);
             for (var i = 0; i < this.moving.thunder.length; i++) {
-                x.push({
-                    pos: this.moving.thunder[i].pos,
-                    color: "rgba(" + this.moving.thunder[i].m + this.moving.thunder[i].op + ")"
-                })
-            }
-            this.draw_gradient(ctx, x);
-            for (var i = 0; i < this.moving.thunder.length; i++) {
-                if (this.moving.thunder[i].op > 0) {
-                    this.moving.thunder[i].op = this.moving.thunder[i].op - 0.1;    ////????
-                    if (this.moving.thunder[i].op < 0) {
-                        this.moving.thunder[i].op = 0;
+                if (this.moving.thunder[i].a > 0) {
+                    this.moving.thunder[i].a = this.moving.thunder[i].a - 0.1;    ////????
+                    if (this.moving.thunder[i].a < 0) {
+                        this.moving.thunder[i].a = 0;
                     }
                 }
-                if (del < this.moving.thunder[i].op) {
-                    del = this.moving.thunder[i].op;
+                if (del < this.moving.thunder[i].a) {
+                    del = this.moving.thunder[i].a;
                 }
             }
             if (del == 0) {
@@ -286,37 +277,53 @@ var blo = {
         var i = this.moving.ground[this.moving.ground.length - 1];
 
     },
+    move_overlay_fade: function (aim, cur) {
+        cur.r = move_overlay_fade_x(aim.r, cur.r, this.config.background.fade_speed, false);
+        cur.g = move_overlay_fade_x(aim.g, cur.g, this.config.background.fade_speed, false);
+        cur.b = move_overlay_fade_x(aim.b, cur.b, this.config.background.fade_speed, false);
+        cur.a = move_overlay_fade_x(aim.a, cur.a, this.config.background.fade_speed_a, true);
+
+        return cur;
+
+        function move_overlay_fade_x(aim, cur, speed, op) {
+            if (cur > aim) {
+                cur = cur - speed;
+            } else if (cur < aim) {
+                cur = cur + speed;
+            }
+
+            if(op){
+                if(op && cur < 0){
+                    cur = 0;
+                } else if(op && cur > 1){
+                    cur = 1;
+                }
+                cur = Number(cur.toFixed(1));
+            }
+
+            return cur;
+        }
+    },
     move_background: function () {
         if (this.moving.background.col1_cur == undefined) {
             this.moving.background.col1_cur = this.moving.background.col1;
             this.moving.background.col2_cur = this.moving.background.col2;
         }
 
-        this.moving.background.col1_cur = move_background_x(this.moving.background.col1, this.moving.background.col1_cur);
-        this.moving.background.col2_cur = move_background_x(this.moving.background.col2, this.moving.background.col2_cur);
-
-        function move_background_x(aim, cur) {
-            cur.a = aim.a;
-
-            cur.r = move_background_x_inc(aim.r, cur.r);
-            cur.g = move_background_x_inc(aim.g, cur.g);
-            cur.b = move_background_x_inc(aim.b, cur.b);
-
-            return cur;
-
-            function move_background_x_inc(aim, cur) {
-                if (cur > aim) {
-                    cur = cur - blo.config.background.fade_speed;
-                } else if (cur < aim) {
-                    cur = cur + blo.config.background.fade_speed;
-                }
-                return cur;
-            }
-        }
+        this.moving.background.col1_cur = this.move_overlay_fade(this.moving.background.col1, this.moving.background.col1_cur);
+        this.moving.background.col2_cur = this.move_overlay_fade(this.moving.background.col2, this.moving.background.col2_cur);
+    },
+    move_overlay: function () {
+        this.moving.overlay.col1_cur = this.move_overlay_fade(this.moving.overlay.col1, this.moving.overlay.col1_cur);
+        this.moving.overlay.col2_cur = this.move_overlay_fade(this.moving.overlay.col2, this.moving.overlay.col2_cur);
     },
     move_rain: function () {
-        if (this.config.weather.rain.active) {
-            if ((Math.floor(Math.random() * 100) + 1) <= this.config.weather.rain.spawn_rate && this.moving.rain.length < this.config.weather.rain.max_drops) {
+        //console.log(this.ctx.canvas.width * this.config.weather.rain.max_drops + " " + this.moving.rain.length);
+        if (this.config.weather.weathers[this.config.weather.weather_index].rain == true
+            && this.moving.rain.length < this.ctx.canvas.width * this.config.weather.rain.max_drops
+            && Math.floor(Math.random() * 100 <= this.config.weather.rain.spawn_rate)
+        ) {
+            for(var i = 0; i < Math.floor(this.ctx.canvas.width * this.config.weather.rain.spawns_per_loop); i++){
                 var shift = (this.ctx.canvas.height / this.config.weather.rain.speed_y) * this.config.weather.rain.speed_x;
                 this.moving.rain.push({
                     xr: Math.floor(Math.random() * (this.ctx.canvas.width + shift) - shift),
@@ -337,16 +344,41 @@ var blo = {
         this.config.theme_index = Math.floor(Math.random() * this.config.background.themes.length);
         this.spawn_background_both();
     },
+    change_weather: function () {
+        this.config.weather.weather_index = Math.floor(Math.random() * this.config.weather.weathers.length);
+
+        this.moving.overlay.col1 = Object.create(this.config.weather.weathers[this.config.weather.weather_index].overlay[0]);
+        this.moving.overlay.col2 = Object.create(this.config.weather.weathers[this.config.weather.weather_index].overlay[1]);
+        if(this.moving.overlay.col1_cur == undefined){
+            this.moving.overlay.col1_cur = Object.create(this.moving.overlay.col1);
+            this.moving.overlay.col2_cur = Object.create(this.moving.overlay.col2);
+        } 
+    },
     spawn_cloud: function () {
-        var cloud = this.parts.clouds[Math.floor(Math.random() * (this.parts.clouds.length))];
-        this.moving.sky.push({
-            img: cloud.img,
-            x: -cloud.width,
-            y: Math.floor(Math.random() * Math.abs(this.config.sky.cloud_min_y - this.config.sky.cloud_max_y)) + this.config.sky.cloud_min_y,
-            additionalSpeed: Math.floor(Math.random() * 3),
-            start: this.line + cloud.width,
-            width: cloud.width,
-        });
+        var we = undefined;
+        var sp = undefined;
+        var clouds = undefined;
+        if (this.config.weather.weathers[this.config.weather.weather_index].cloud == "cover") {
+            we = Math.floor(this.config.weather.cloud.max_storm * this.ctx.canvas.width);
+            sp = this.config.weather.cloud.spawn_rate_storm;
+            clouds = this.parts.clouds.storm;
+        }
+        if (this.config.weather.weathers[this.config.weather.weather_index].cloud == "light") {
+            we = Math.floor(this.config.weather.cloud.max_light* this.ctx.canvas.width);
+            sp = this.config.weather.cloud.spawn_rate_light;
+            clouds = this.parts.clouds.light;
+        }
+        if (we != undefined && this.moving.sky.length < we && sp != undefined && Math.floor(Math.random() * 100) + 1 <= sp) {
+            var cloud = clouds[Math.floor(Math.random() * clouds.length)];
+            this.moving.sky.push({
+                img: cloud.img,
+                x: -cloud.width,
+                y: Math.floor(Math.random() * Math.abs(this.config.weather.cloud.min_y - this.config.weather.cloud.max_y)) + this.config.weather.cloud.min_y,
+                additionalSpeed: Math.floor(Math.random() * 3),
+                start: this.line + cloud.width,
+                width: cloud.width,
+            });
+        }
     },
     spawn_ground: function () {
         var ground = this.parts.isles[Math.floor(Math.random() * (this.parts.isles.length))];
@@ -388,20 +420,32 @@ var blo = {
         this.spawn_background(true);
         this.spawn_background(false);
     },
+    spawn_thunder: function () {
+        if (
+            Math.floor(Math.random() * 100) + 1 <= this.config.weather.thunder.spawn_rate &&
+            this.config.weather.weathers[this.config.weather.weather_index].thunder == true &&
+            this.moving.thunder == undefined
+        ) {
+            this.moving.thunder = [
+                Object.create(this.config.weather.thunder.color1),
+                Object.create(this.config.weather.thunder.color2)
+            ];
+        }
+    },
     merge_config: function (a, b) {
         for (var key in b) {
-            if((typeof a[key] === "object") && (a[key] !== null)){
+            if ((typeof a[key] === "object") && (a[key] !== null)) {
                 a[key] = blo.merge_config(a[key], b[key]);
             }
-            else if(b.hasOwnProperty(key)){
+            else if (b.hasOwnProperty(key)) {
                 a[key] = b[key];
             }
         }
         return a;
     },
 }
-blo.init();
 
+blo.init();
 setTimeout(function () {
     document.getElementById("loading").style.opacity = 0;
 });

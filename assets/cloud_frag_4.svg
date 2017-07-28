@@ -1,12 +1,12 @@
 <svg width="190" height="170" viewbox="0 0 190 170" xmlns="http://www.w3.org/2000/svg">
 
-    <circle cx="60" cy="60" r="60" fill="#AF4448"/>
-    <circle cx="100" cy="130" r="40" fill="#AF4448"/>
-    <circle cx="140" cy="70" r="50" fill="#AF4448"/>
+    <circle cx="60" cy="60" r="60" fill="#688ac4"/>
+    <circle cx="100" cy="130" r="40" fill="#688ac4"/>
+    <circle cx="140" cy="70" r="50" fill="#688ac4"/>
 
-    <circle cx="60" cy="60" r="50" fill="#F5F5DC"/>
-    <circle cx="100" cy="130" r="30" fill="#F5F5DC"/>
-    <circle cx="140" cy="70" r="40" fill="#F5F5DC"/>
-    <circle cx="100" cy="90" r="30" fill="#F5F5DC"/>
+    <circle cx="60" cy="60" r="50" fill="#FFFFFF"/>
+    <circle cx="100" cy="130" r="30" fill="#FFFFFF"/>
+    <circle cx="140" cy="70" r="40" fill="#FFFFFF"/>
+    <circle cx="100" cy="90" r="30" fill="#FFFFFF"/>
 
 </svg>
