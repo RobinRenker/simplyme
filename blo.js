@@ -5,10 +5,18 @@ var blo = {
     config: {
         theme_index: 0,
         theme_change_rate: 8,//%
+        scale: 1,
+        device_size: 0,
+        device: [
+            {width: 0, id: 0, config:{scale: 0.5}},
+            {width: 600, id: 1, config:{scale: 1}},
+            {width: 960, id: 2, config:{scale: 1}},
+            {width: 1440, id: 3, config:{scale: 1}}
+        ],
         weather: {
             weather_index: 0,
             weathers: [
-                {id: "sun", cloud: "light", overlay: [{r:0,g:0,b:0,a:0},{r:0,g:0,b:0,a:0}]},
+                //{id: "sun", cloud: "light", overlay: [{r:0,g:0,b:0,a:0},{r:0,g:0,b:0,a:0}]},
                 {id: "storm", rain: true, cloud: "cover", thunder: true, overlay: [{r:0,g:0,b:0,a:0.8},{r:0,g:0,b:0,a:0}]}
             ],
             change_rate: 3,
@@ -104,6 +112,7 @@ var blo = {
             {img: document.getElementById('ground_frag_1'), width: 1500, height: 600, leftHor: 330, rightHor: 350},
             {img: document.getElementById('ground_spacer_1'), width: 500, height: 1000, leftHor: 300, rightHor: 250},
             {img: document.getElementById('ground_spacer_2'), width: 500, height: 1000, leftHor: 320, rightHor: 600},
+            {img: document.getElementById('ground_isle_2'), width: 1200, height: 800, leftHor: 320, rightHor: 600},
         ]
     },
     moving: {
@@ -153,6 +162,15 @@ var blo = {
         this.resize_timeout = setTimeout(function () {
             ctx.canvas.width = window.innerWidth;
             ctx.canvas.height = window.innerHeight;
+
+            var index = 0;
+            for (var i = 0; i < blo.config.device.length; i++) {
+                if (window.innerWidth >= blo.config.device[i].width) {
+                    blo.config.device_size = blo.config.device[i].id;
+                    index = i;
+                }
+            }
+            blo.config = blo.merge_config(blo.config, blo.config.device[index].config);
             lo_clear();
         }, 50);
 
@@ -167,12 +185,16 @@ var blo = {
 
         this.draw_overlay(ctx, this.moving.background.col1_cur, this.moving.background.col2_cur);
 
+        ctx.scale(this.config.scale, this.config.scale);
+
         for (var i = 0; i < this.moving.sky.length; i++) {
             ctx.drawImage(this.moving.sky[i].img, this.moving.sky[i].x, this.moving.sky[i].y);
         }
         for (var i = 0; i < this.moving.ground.length; i++) {
-            ctx.drawImage(this.moving.ground[i].img, this.moving.ground[i].x, this.moving.ground[i].y);
+            ctx.drawImage(this.moving.ground[i].img, this.moving.ground[i].x, this.moving.ground[i].y*(1/this.config.scale));
         }
+
+        ctx.scale(1/this.config.scale,1/this.config.scale);
 
         this.draw_rain(ctx);
         this.draw_overlay(ctx, this.moving.overlay.col1_cur, this.moving.overlay.col2_cur);
@@ -268,13 +290,13 @@ var blo = {
     },
     move_ground: function () {
         for (var i = 0; i < this.moving.ground.length; i++) {
-            this.moving.ground[i].x = this.line - this.moving.ground[i].start - this.moving.ground[i].width;
-            this.moving.ground[i].y = this.ctx.canvas.height - this.moving.ground[i].bottom_offset;
+            //this.moving.ground[i].x = this.line - this.moving.ground[i].start - this.moving.ground[i].width;
+            this.moving.ground[i].y = this.ctx.canvas.height - (this.moving.ground[i].bottom_offset*this.config.scale);
+            this.moving.ground[i].x = (this.ctx.canvas.width*(1/this.config.scale)-this.moving.ground[i].width)/2;
         }
         if (this.moving.ground.length == 0) {
             this.spawn_ground();
         }
-        var i = this.moving.ground[this.moving.ground.length - 1];
 
     },
     move_overlay_fade: function (aim, cur) {
@@ -352,7 +374,7 @@ var blo = {
         if(this.moving.overlay.col1_cur == undefined){
             this.moving.overlay.col1_cur = Object.create(this.moving.overlay.col1);
             this.moving.overlay.col2_cur = Object.create(this.moving.overlay.col2);
-        } 
+        }
     },
     spawn_cloud: function () {
         var we = undefined;
@@ -381,12 +403,12 @@ var blo = {
         }
     },
     spawn_ground: function () {
-        var ground = this.parts.isles[Math.floor(Math.random() * (this.parts.isles.length))];
+        var ground = this.parts.isles[3];//this.parts.isles[Math.floor(Math.random() * (this.parts.isles.length))];
         this.moving.ground.push({
             img: ground.img,
             height: ground.height,
             width: ground.width,
-            bottom_offset: 400,
+            bottom_offset: 600,
             x: 0,
             y: 0,
             start: this.line,

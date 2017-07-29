@@ -1,0 +1,77 @@
+<svg width="1200" height="600" viewbox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+        <g id="chamber">
+            <rect width="4" height="15" fill="#f765b8" x="5" y="9"></rect>
+            <rect width="4" height="15" fill="#f765b8" x="31" y="9"></rect>
+
+            <line stroke-linecap="round" x1="2.5" y1="10" x2="20" y2="2.5" stroke="#27fdf5" stroke-width="5"/>
+            <line stroke-linecap="round" x1="37.5" y1="10" x2="20" y2="2.5" stroke="#27fdf5" stroke-width="5"/>
+
+            <rect width="24" height="13" fill="#f765b8" y="25" x="8"></rect>
+
+            <line stroke-linecap="round" x1="35" y1="25" x2="5" y2="25" stroke="#27fdf5" stroke-width="5"/>
+            <line stroke-linecap="round" x1="30" y1="37.5" x2="10" y2="37.5" stroke="#27fdf5" stroke-width="5"/>
+            <line stroke-linecap="round" x1="30" y1="37.5" x2="35" y2="25" stroke="#27fdf5" stroke-width="5"/>
+            <line stroke-linecap="round" x1="10" y1="37.5" x2="5" y2="25" stroke="#27fdf5" stroke-width="5"/>
+        </g>
+    </defs>
+
+    <rect width="20" height="170" fill="#27fdf5" x="510" y="142" transform="rotate(-35, 520, 143)"></rect>
+    <rect width="20" height="200" fill="#27fdf5" x="510" y="142" transform="rotate(35, 520, 143)"></rect>
+
+    <path d="
+    M0 600 C
+    80 350
+    80 350
+    25 220
+    L 250 220
+    L 250 600 Z" fill="#2A2A2A"></path>
+    <path d="M25 220 C 200 180, 250 200, 400 300" fill="#2A2A2A"/>
+    <path d="
+    M240 215 C
+    500 340
+    500 340
+    600 300
+    L 600 600
+    L 240 600 Z" fill="#2A2A2A"></path>
+    <polygon points="900,400 590,600 590,360" fill="#2A2A2A" />
+    <path d="M1000 450 C 700 200, 700 200, 500 350" fill="#2A2A2A"/>
+    <path d="M1200 600 C 1050 300, 1050 300, 700 500" fill="#3f3f3f"/>
+    <path d="M1000 600 C 550 350, 550 350, 400 600" fill="#3f3f3f"/>
+    <polygon points="1200,600 850,600 850,500" fill="#3f3f3f" />
+    <path d="M50 600 C 120 500, 120 500, 350 600" fill="#3f3f3f"/>
+
+    <circle cx="520" cy="143" r="140" fill="none" stroke="#f765b8" stroke-width="5"/>
+    <circle cx="520" cy="143" r="15" fill="#f765b8"/>
+    <rect width="4" height="284" fill="#f765b8" x="518" y="1"></rect>
+    <rect width="4" height="284" fill="#f765b8" x="518" y="1" transform="rotate(22.5, 520, 143)"></rect>
+    <rect width="4" height="284" fill="#f765b8" x="518" y="1" transform="rotate(45, 520, 143)"></rect>
+    <rect width="4" height="284" fill="#f765b8" x="518" y="1" transform="rotate(67.5, 520, 143)"></rect>
+    <rect width="4" height="284" fill="#f765b8" x="518" y="1" transform="rotate(90, 520, 143)"></rect>
+    <rect width="4" height="284" fill="#f765b8" x="518" y="1" transform="rotate(112.5, 520, 143)"></rect>
+    <rect width="4" height="284" fill="#f765b8" x="518" y="1" transform="rotate(135, 520, 143)"></rect>
+    <rect width="4" height="284" fill="#f765b8" x="518" y="1" transform="rotate(157.5, 520, 143)"></rect>
+    <circle cx="520" cy="143" r="10" fill="#27fdf5"/>
+
+    <use x="500" y="1" href="#chamber"/>
+    <use x="500" y="281" href="#chamber"/>
+    <use x="360" y="141" href="#chamber"/>
+    <use x="640" y="141" href="#chamber"/>
+
+    <use x="630" y="87" href="#chamber"/>
+    <use x="370" y="87" href="#chamber"/>
+    <use x="630" y="195" href="#chamber"/>
+    <use x="370" y="195" href="#chamber"/>
+
+    <use x="400" y="240" href="#chamber"/>
+    <use x="600" y="240" href="#chamber"/>
+    <use x="400" y="42" href="#chamber"/>
+    <use x="600" y="42" href="#chamber"/>
+
+    <use x="446" y="270" href="#chamber"/>
+    <use x="554" y="270" href="#chamber"/>
+    <use x="446" y="12" href="#chamber"/>
+    <use x="554" y="12" href="#chamber"/>
+
+</svg>
