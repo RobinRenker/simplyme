@@ -1,0 +1,113 @@
+<svg width="500" height="1100" viewbox="0 0 500 1100" xmlns="http://www.w3.org/2000/svg">
+
+    <rect width="500" height="1100" fill="yellow"></rect>
+
+    <defs>
+        <g id="choco">
+            <rect x="0" y="0" rx="10" ry="10" width="100" height="350" fill="#614126" stroke="#000" stroke-width="10"/>
+        </g>
+        <g id="cherry">
+            <circle cx="65" cy="190" r="65" fill="red" stroke="#000" stroke-width="10"/>
+            <path d="M47,130 C30,75 30,75 30,25" fill="none" stroke="#0F0" stroke-width="10" stroke-linecap="round"/>
+            <path d="M47,130 C37,75 37,75 42,21" fill="none" stroke="#0F0" stroke-width="10" stroke-linecap="round"/>
+            <line stroke-width="10" stroke="#0F0" x1="30" x2="42" y1="25" y2="21" stroke-linecap="round"/>
+            <line stroke-width="10" stroke="#0F0" x1="35" x2="35" y1="45" y2="25"/>
+            <path d="M50,150 C20,85 25,85 20,20" fill="none" stroke="#000" stroke-width="10" stroke-linecap="round"/>
+            <path d="M55,145 C45,85 45,85 50,10" fill="none" stroke="#000" stroke-width="10" stroke-linecap="round"/>
+            <line stroke-width="10" stroke="#000" x1="20" x2="50" y1="20" y2="10" stroke-linecap="round"/>
+            <line stroke-width="10" stroke="#000" x1="50" x2="55" y1="150" y2="145" stroke-linecap="round"/>
+        </g>
+        <g id="topping">
+            <path d="M250 0 Q 440 150 290 200" stroke="black" stroke-width="10" fill="blue" stroke-linecap="round"/>
+            <path d="M250 0 Q 290 80 180 80" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M400 300 Q 390 280 370 260" stroke="black" stroke-width="10" fill="blue" stroke-linecap="round"/>
+            <path d="M340 300 Q 450 230 320 188" stroke="black" stroke-width="10" fill="blue" stroke-linecap="round"/>
+            <path d="M50 200 Q -30 250 40 347" stroke="black" stroke-width="10" fill="blue" stroke-linecap="round"/>
+            <path d="M100 100 Q -60 180 150 250" stroke="black" stroke-width="10" fill="blue" stroke-linecap="round"/>
+        </g>
+        <g id="topping_cherry">
+            <path d="M100 170 Q 180 200 230 130" stroke="none" fill="blue" stroke-linecap="round"/>
+            <path d="M100 170 Q 150 120 230 130" stroke="black" stroke-width="10" fill="blue" stroke-linecap="round"/>
+        </g>
+        <g id="cone">
+            <!--Fill-->
+            <polygon points="380,250 190,185 424,95 404,170 407,190" fill="#DB7F37"/>
+            <!--Stroke-->
+            <line x1="420" x2="420" y1="90" y2="130" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="400" x2="420" y1="170" y2="130" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="400" x2="405" y1="170" y2="205" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="380" x2="405" y1="250" y2="205" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+
+            <!--Fill-->
+            <polygon points="374,280 335,430 318,453 288,555 278,568 245,675 215,705 188,690 170,635 155,550 110,420 105,400 62,260, 62,240 38,180 30,120" fill="#DB7F37"/>
+            <!--Stroke-->
+            <line x1="365" x2="375" y1="300" y2="280" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="365" x2="365" y1="300" y2="330" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="345" x2="365" y1="375" y2="330" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="345" x2="340" y1="375" y2="420" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="315" x2="340" y1="450" y2="420" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="315" x2="315" y1="450" y2="480" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="290" x2="315" y1="545" y2="480" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="290" x2="275" y1="545" y2="565" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="275" x2="275" y1="590" y2="565" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="275" x2="265" y1="590" y2="610" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="250" x2="265" y1="665" y2="610" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="250" x2="215" y1="665" y2="705" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+
+            <line x1="190" x2="215" y1="690" y2="705" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="190" x2="185" y1="690" y2="670" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="165" x2="185" y1="635" y2="670" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="165" x2="170" y1="635" y2="610" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="160" x2="170" y1="590" y2="610" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="160" x2="155" y1="590" y2="550" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="145" x2="155" y1="535" y2="550" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="145" x2="140" y1="535" y2="505" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="130" x2="140" y1="490" y2="505" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="130" x2="125" y1="490" y2="455" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="110" x2="125" y1="435" y2="455" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="110" x2="110" y1="435" y2="400" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="95" x2="110" y1="385" y2="400" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="95" x2="90" y1="385" y2="345" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="75" x2="90" y1="320" y2="345" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="75" x2="75" y1="320" y2="295" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="65" x2="75" y1="275" y2="295" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="65" x2="65" y1="275" y2="240" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="50" x2="65" y1="220" y2="240" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="50" x2="50" y1="220" y2="200" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="35" x2="50" y1="185" y2="200" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="35" x2="35" y1="185" y2="145" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+            <line x1="20" x2="35" y1="100" y2="145" stroke-width="10" stroke="#000" stroke-linecap="round"/>
+
+
+
+
+
+            <!--Fill-->
+            <line x1="170" x2="300" y1="170" y2="142" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
+            <line x1="400" x2="300" y1="85" y2="142" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
+            <line x1="413" x2="420" y1="75" y2="35" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
+            <line x1="385" x2="417" y1="90" y2="15" stroke-width="30" stroke="#974020"/>
+            <!--Stroke-->
+            <path d="M400 5 Q 400 130 155 158" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M430 70 Q 400 140 190 180" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M400 5 Q 450 30 430 70" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <!--Fill-->
+            <line x1="200" x2="370" y1="205" y2="265" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
+            <line x1="200" x2="70" y1="205" y2="130" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
+            <line x1="25" x2="70" y1="60" y2="130" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
+            <line x1="18" x2="58" y1="70" y2="130" stroke-width="20" stroke="#974020" stroke-linecap="round"/>
+            <line x1="30" x2="110" y1="70" y2="140" stroke-width="20" stroke="#974020" stroke-linecap="round"/>
+            <!--Stroke-->
+            <path d="M30 45 Q 150 200 370 245" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M10 60 Q 0 160 360 280" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M10 60 Q 15 40 30 45" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M360 280 Q 410 275 370 245" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+        </g>
+    </defs>
+
+    <use x="390" y="-120" href="#choco" transform="rotate(23, 0, 0)"/>
+    <use y="100" href="#topping"/>
+    <use x="85" y="0" href="#cherry"/>
+    <use y="390" href="#cone"/>
+    <use y="100" href="#topping_cherry"/>
+</svg>
