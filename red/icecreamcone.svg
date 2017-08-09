@@ -1,6 +1,6 @@
 <svg width="500" height="1100" viewbox="0 0 500 1100" xmlns="http://www.w3.org/2000/svg">
 
-    <rect width="500" height="1100" fill="yellow"></rect>
+    <rect width="500" height="1100" fill="#ff9469"></rect>
 
     <defs>
         <g id="choco">
@@ -23,25 +23,25 @@
             <!--Fill Ice Cream-->
             <polygon points="350,170 280,40 50,190 8,252 70,290 90,285 170,330 185,315 190,325 255,320 275,285 300,310 335,310 340,300, 370,300 390,260" fill="#ff284d"/>
             <!--Stroke-->
-            <path d="M250 0 Q 440 150 290 200" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M250 0 Q 290 80 180 80" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
-            <path d="M360 300 Q 432 313 385 250" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M330 280 Q 450 230 350 170" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M50 200 Q -30 250 40 347" stroke="black" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M70 290 Q -15 340 11 245" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M70 290 Q 95 275 100 290" stroke="black" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M170 330 Q 115 410 100 290" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M360 300 Q 330 296 335 310" stroke="black" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M290 300 Q 345 375 335 310" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M290 300 Q 270 270 260 310" stroke="black" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M260 310 Q 230 460 190 320" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M170 330 Q 185 300 190 320" stroke="black" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M5 280 Q 5 260 13 240" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
-            <path d="M100 100 Q -60 180 150 250" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M250 0 Q 440 150 290 200" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M250 0 Q 290 80 180 80" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M360 300 Q 432 308 385 250" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M330 280 Q 450 230 350 170" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M50 200 Q -30 250 40 347" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M70 290 Q -15 340 11 245" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M70 290 Q 95 275 100 290" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M170 330 Q 115 410 100 290" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M360 300 Q 330 296 335 322" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M290 300 Q 345 375 335 310" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M290 300 Q 270 270 260 310" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M260 310 Q 230 460 190 320" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M170 330 Q 185 300 190 320" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M5 280 Q 5 260 13 240" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M100 100 Q -60 180 150 250" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
         </g>
         <g id="topping_cherry">
             <path d="M100 170 Q 180 200 230 130" stroke="none" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M100 170 Q 150 120 230 130" stroke="black" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M100 170 Q 150 120 230 130" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
         </g>
         <g id="cone">
             <!--Fill-->
@@ -102,9 +102,9 @@
             <line x1="413" x2="420" y1="75" y2="35" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
             <line x1="385" x2="417" y1="90" y2="15" stroke-width="30" stroke="#974020"/>
             <!--Stroke-->
-            <path d="M400 5 Q 400 130 155 158" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
-            <path d="M430 70 Q 400 140 190 180" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
-            <path d="M400 5 Q 450 30 430 70" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M400 5 Q 400 130 155 158" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M430 70 Q 400 140 190 180" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M400 5 Q 450 30 430 70" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
             <!--Fill-->
             <line x1="200" x2="370" y1="205" y2="265" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
             <line x1="200" x2="70" y1="205" y2="130" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
@@ -112,16 +112,45 @@
             <line x1="18" x2="58" y1="70" y2="130" stroke-width="20" stroke="#974020" stroke-linecap="round"/>
             <line x1="30" x2="110" y1="70" y2="140" stroke-width="20" stroke="#974020" stroke-linecap="round"/>
             <!--Stroke-->
-            <path d="M30 45 Q 150 200 370 245" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
-            <path d="M10 60 Q 0 160 360 280" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
-            <path d="M10 60 Q 15 40 30 45" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
-            <path d="M360 280 Q 410 275 370 245" stroke="black" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M30 45 Q 150 200 370 245" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M10 60 Q 0 160 360 280" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M10 60 Q 15 40 30 45" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+            <path d="M360 280 Q 410 275 370 245" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
+        </g>
+        <g id="hash">
+            <path d="M385 145 Q 387 180 360 235" fill="#974020"/>
+            <path d="M340 175 Q 345 190 322 230" fill="#974020"/>
+            <path d="M290 170 Q 290 190 275 213" fill="#974020"/>
+
+            <path d="M310 225 Q 270 198 255 175" fill="#974020"/>
+            <path d="M350 160 Q 370 188 392 195" fill="#974020"/>
+            <path d="M320 180 Q 340 205 385 235" fill="#974020"/>
+
+            <path d="M290 275 Q 300 310 330 335" fill="#974020"/>
+            <path d="M210 240 Q 230 295 328 426" fill="#974020"/>
+            <path d="M130 210 Q 185 320 300 470" fill="#974020"/>
+            <path d="M80 220 Q 170 390 280 530" fill="#974020"/>
+            <path d="M100 345 Q 170 480 265 600" fill="#974020"/>
+            <path d="M160 530 Q 200 610 240 650" fill="#974020"/>
+            <path d="M180 630 Q 200 670 220 680" fill="#974020"/>
+
+            <path d="M70 210 Q 110 205 120 190" fill="#974020"/>
+            <path d="M80 260 Q 150 240 170 220" fill="#974020"/>
+            <path d="M90 320 Q 220 275 250 245" fill="#974020"/>
+            <path d="M105 380 Q 220 340 310 280" fill="#974020"/>
+            <path d="M130 435 Q 220 405 320 340" fill="#974020"/>
+            <path d="M150 490 Q 220 470 290 420" fill="#974020"/>
+            <path d="M167 545 Q 220 530 290 485" fill="#974020"/>
+            <path d="M180 595 Q 220 590 270 555" fill="#974020"/>
+            <path d="M180 645 Q 220 640 250 615" fill="#974020"/>
         </g>
     </defs>
 
-    <!-- <use x="390" y="-120" href="#choco" transform="rotate(23, 0, 0)"/> -->
+    <use x="390" y="-120" href="#choco" transform="rotate(23, 0, 0)"/>
     <use y="100" href="#topping"/>
     <use x="85" y="0" href="#cherry"/>
     <use y="390" href="#cone"/>
     <use y="100" href="#topping_cherry"/>
+    <use y="390" href="#hash"/>
+
 </svg>
