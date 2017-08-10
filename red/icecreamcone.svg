@@ -4,14 +4,24 @@
 
     <defs>
         <g id="choco">
-            <rect x="0" y="0" rx="10" ry="10" width="100" height="350" fill="#614126" stroke="#000" stroke-width="10"/>
+            <rect x="0" y="0" rx="10" ry="10" width="60" height="350" fill="#614126" stroke="#000" stroke-width="10"/>
+
+            <path d="M10 10 Q 20 30 50 50" stroke="none" fill="#432d1a" stroke-linecap="round"/>
+            <path d="M10 30 Q 20 50 50 70" stroke="none" fill="#432d1a" stroke-linecap="round"/>
+
+            <path d="M10 80 Q 20 100 50 120" stroke="none" fill="#432d1a" stroke-linecap="round"/>
+            <path d="M10 100 Q 20 120 50 140" stroke="none" fill="#432d1a" stroke-linecap="round"/>
+
+            <path d="M10 150 Q 20 170 50 190" stroke="none" fill="#432d1a" stroke-linecap="round"/>
+            <path d="M10 170 Q 20 190 50 210" stroke="none" fill="#432d1a" stroke-linecap="round"/>
         </g>
         <g id="cherry">
-            <circle cx="65" cy="190" r="65" fill="red" stroke="#000" stroke-width="10"/>
-            <path d="M47,130 C30,75 30,75 30,25" fill="none" stroke="#0F0" stroke-width="10" stroke-linecap="round"/>
-            <path d="M47,130 C37,75 37,75 42,21" fill="none" stroke="#0F0" stroke-width="10" stroke-linecap="round"/>
-            <line stroke-width="10" stroke="#0F0" x1="30" x2="42" y1="25" y2="21" stroke-linecap="round"/>
-            <line stroke-width="10" stroke="#0F0" x1="35" x2="35" y1="45" y2="25"/>
+            <circle cx="65" cy="190" r="65" fill="#F00" stroke="#000" stroke-width="10"/>
+
+            <path d="M40 155 Q 60 165 65 140" fill="#000"/>
+            <path d="M40 155 Q 60 150 65 140" fill="#F00"/>
+
+            <polygon points="50,140 50,10 20,20 30,100" fill="#0F0"/>
             <path d="M50,150 C20,85 25,85 20,20" fill="none" stroke="#000" stroke-width="10" stroke-linecap="round"/>
             <path d="M55,145 C45,85 45,85 50,10" fill="none" stroke="#000" stroke-width="10" stroke-linecap="round"/>
             <line stroke-width="10" stroke="#000" x1="20" x2="50" y1="20" y2="10" stroke-linecap="round"/>
@@ -20,15 +30,15 @@
         <g id="topping">
             <!--Fill Ice Cream-->
             <polygon points="410,300 40,250 10,290 40,340 140,460 360,400" fill="#00E5EE"/>
-            <!--Fill Ice Cream-->
-            <polygon points="350,170 280,40 50,190 8,252 70,290 90,285 170,330 185,315 190,325 255,320 275,285 300,310 335,310 340,300, 370,300 390,260" fill="#ff284d"/>
+            <!--Fill Ice Cream Topping-->
+            <polygon points="350,170 280,40 50,190 15,252 70,290 90,285 170,330 185,315 190,325 255,320 275,285 300,310 335,310 340,300, 370,300 390,260" fill="#ff284d"/>
             <!--Stroke-->
             <path d="M250 0 Q 440 150 290 200" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
             <path d="M250 0 Q 290 80 180 80" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
             <path d="M360 300 Q 432 308 385 250" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
             <path d="M330 280 Q 450 230 350 170" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
-            <path d="M50 200 Q -30 250 40 347" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M70 290 Q -15 340 11 245" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
+            <path d="M40 200 Q -5 260 40 347" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M70 290 Q -5 340 20 243" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
             <path d="M70 290 Q 95 275 100 290" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
             <path d="M170 330 Q 115 410 100 290" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
             <path d="M360 300 Q 330 296 335 322" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
@@ -36,7 +46,6 @@
             <path d="M290 300 Q 270 270 260 310" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
             <path d="M260 310 Q 230 460 190 320" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
             <path d="M170 330 Q 185 300 190 320" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M5 280 Q 5 260 13 240" stroke="#000" stroke-width="10" fill="transparent" stroke-linecap="round"/>
             <path d="M100 100 Q -60 180 150 250" stroke="#000" stroke-width="10" fill="#ff284d" stroke-linecap="round"/>
         </g>
         <g id="topping_cherry">
@@ -91,11 +100,6 @@
             <line x1="35" x2="50" y1="185" y2="200" stroke-width="10" stroke="#000" stroke-linecap="round"/>
             <line x1="35" x2="35" y1="185" y2="145" stroke-width="10" stroke="#000" stroke-linecap="round"/>
             <line x1="20" x2="35" y1="100" y2="145" stroke-width="10" stroke="#000" stroke-linecap="round"/>
-
-
-
-
-
             <!--Fill-->
             <line x1="170" x2="300" y1="170" y2="142" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
             <line x1="400" x2="300" y1="85" y2="142" stroke-width="30" stroke="#974020" stroke-linecap="round"/>
@@ -144,13 +148,27 @@
             <path d="M180 595 Q 220 590 270 555" fill="#974020"/>
             <path d="M180 645 Q 220 640 250 615" fill="#974020"/>
         </g>
+        <g id="ice_detail">
+            <circle cx="300" cy="100" r="10" fill="#00E5EE" stroke-width="5" stroke="#000"/>
+            <circle cx="150" cy="200" r="10" fill="#00E5EE" stroke-width="5" stroke="#000"/>
+            <circle cx="340" cy="230" r="10" fill="#00E5EE" stroke-width="5" stroke="#000"/>
+            <circle cx="230" cy="280" r="10" fill="#00E5EE" stroke-width="5" stroke="#000"/>
+            <circle cx="70" cy="250" r="10" fill="#00E5EE" stroke-width="5" stroke="#000"/>
+            <circle cx="90" cy="130" r="10" fill="#00E5EE" stroke-width="5" stroke="#000"/>
+            <circle cx="260" cy="210" r="10" fill="#00E5EE" stroke-width="5" stroke="#000"/>
+            <circle cx="140" cy="330" r="10" fill="#00E5EE" stroke-width="5" stroke="#000"/>
+
+            <path d="M80 340 Q 80 360 100 380" stroke="#00B7BE" fill="none" stroke-width="10" stroke-linecap="round"/>
+            <path d="M280 330 Q 300 360 330 370" stroke="#00B7BE" fill="none" stroke-width="10" stroke-linecap="round"/>
+            <path d="M200 395 Q 230 430 260 400" stroke="#00B7BE" fill="none" stroke-width="10" stroke-linecap="round"/>
+        </g>
     </defs>
 
     <use x="390" y="-120" href="#choco" transform="rotate(23, 0, 0)"/>
     <use y="100" href="#topping"/>
+    <use y="100" href="#ice_detail"/>
     <use x="85" y="0" href="#cherry"/>
     <use y="390" href="#cone"/>
     <use y="100" href="#topping_cherry"/>
     <use y="390" href="#hash"/>
-
 </svg>
